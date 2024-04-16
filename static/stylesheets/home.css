@@ -1,0 +1,329 @@
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ font-family: sans-serif;
+}
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+}
+header{
+    position: fixed;
+    padding: 0 2rem;
+    width: 100%;
+    top: 0%;
+    background-color: #162938;
+    /* background-color: rgba(255,255,255, 0.1); */
+    /* backdrop-filter: blur(15px); */
+    z-index: 1;
+}
+.nav{
+    width: 100%;
+    height: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+}
+.nav h2 {
+    font-size: 1.5em;
+    color:cyan;
+}
+li{
+    list-style: none;
+}
+.nav .links{
+    display: flex;
+    gap: 2rem;
+}
+ .nav a {
+    position:relative;
+    font-size: 1.1em;
+    color:#fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 50px;
+}
+ .nav a:hover{
+    color: cyan;
+}
+.nav a::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    left: 0;
+    bottom: -6px;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+
+}
+.nav a:hover:after{
+    transform-origin: left;
+    transform: scaleX(1);
+    background-color: cyan;
+}
+.nav .login {
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid cyan;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 60px;
+    transition: .5s;
+}
+.nav .login:hover {
+    background:cyan;
+    color: #162938;
+    font-size: 1.5em;
+}
+.dropdown {
+    position: relative;
+    display: inline;
+    margin-left: 60px;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:transparent; 
+    z-index: 1;
+  }
+  .dropdown-content li{
+    padding: 0.7rem;
+    display: flex;
+    align-items: right;
+    justify-content: end;
+  }
+  .dropdown-content a {
+    color: cyan;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+.dropdown-content a:hover {
+    background-color:cyan;
+    color: #162938;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+    justify-content: end;
+    align-items:right;
+}
+.nav .icons {
+    /* position: fixed; */
+    font-size: 30px;
+    color:#fff;
+    /* line-height: 80px; */
+    /* margin-right: 10px; */
+    cursor: pointer;
+    display: none;
+}
+.nav .icons:hover{
+    color:cyan;
+}
+.dropdown_menu{
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    width: 300px;
+    scale: 0;
+    z-index:1;
+    /* background-color: black; */
+    background-color: rgba(255,255,255, 0.1);
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.dropdown_menu.open{
+    scale: 1;
+}
+.dropdown_menu li{
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dropdown_menu li a {
+    position: static;
+    font-size: 1.1em;
+    color:#fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+.dropdown_menu li a:hover{
+    color: cyan;
+}
+@media (max-width: 992px){
+    .nav .login,.nav .links{
+        display: none;
+    }
+    .nav .icons{
+        display: block;
+    }
+    .dropdown_menu{
+        display: block;
+    }
+}
+@media (max-width: 576px){
+    .dropdown_menu{
+        left: 2rem;
+        width: unset;
+    }
+    h1{
+        font-size: 25px;
+    margin-left: 40px;
+    margin-right: 600px;
+    margin-top: 20%;
+    backdrop-filter: blur(2px);
+    }
+ } 
+#home{
+    height: 600px;
+    top: 0%;
+    background-image: url('images/signin.jpg');
+    padding-top: 60px;
+}
+
+
+ h1{
+    color: whitesmoke;
+    font-size:50px;
+    margin-left: 40px;
+    margin-right: 600px;
+    margin-top: 15%;
+    backdrop-filter: blur(2px);   
+    
+}
+p {
+    color:ghostwhite;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-left: 40px;
+    /* background-color: rgba(255,255,255, 0.1);  */
+    /* backdrop-filter: blur(15px);  */
+    /* backdrop-filter: blur(2px);  */
+    cursor: pointer;
+    z-index: 1;
+}
+.about{
+    background-color: grey;
+    height: 100%;
+    background-image: url('/static/images/lms4.jpg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    padding-top: 60px;
+}
+.about h1{
+    margin-top: 0%;
+}
+
+   .contact{
+    min-height: 100vh;
+    background-image: url(/static/images/lms3.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    padding: 50px;
+    text-align: center;
+   }
+   .container{
+    max-width: 900px;
+    margin: 0 auto;
+    
+   }
+   .container h2{
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: steelblue;
+   }
+   .contact-wrapper{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 50px;
+   }
+   .contact-container{
+    backdrop-filter: blur(18px);
+    border-radius: 20px;
+    border: 1px solid slateblue;
+   }
+   .contact-form{
+    text-align: left;
+    margin: 20px 20px 20px 20px;
+    
+   }
+   .contact-form h3{
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: steelblue;
+   }
+   .form-group{
+    margin-bottom: 20px;
+   }
+   input,textarea{
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background-color: #f8f9fa;
+    color: #333;
+   }
+   input:focus,
+   textarea:focus{
+    outline: none;
+    box-shadow: 0 0 8px #bbb;
+   }
+   button{
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: cyan;
+    color: slateblue;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.3s ease;
+   }
+   button:hover{
+    /* background-color: #45a049; */
+    box-shadow: 0 0 8px #bbb;
+   }
+   .contact-info{
+    text-align: left;
+   }
+   .contact-info h3{
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: steelblue;
+   }
+   .contact-info p{
+    margin-bottom: 10px;
+    color: whitesmoke;
+   } 
+   .contact-info i{
+    color: cyan;
+    margin-right: 10px;
+   }
+   @media screen and (max-width: 768px){
+    .container{
+        padding: 20px;
+    }
+    .contact-wrapper{
+        grid-template-columns: 1fr;
+    }
+   }

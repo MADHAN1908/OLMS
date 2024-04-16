@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/messages.css') }}" />
+</head>
+<body>
+    <div class="container">
+
+        <div class="head">
+          <h3>Messages</h3>
+        </div>  
+        <!-- Tab navigation -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'inbox')"><span class="material-symbols-outlined">mail</span><strong>Inbox  </strong></button>
+            <button class="tablinks" onclick="openTab(event, 'sent')"><span class="material-symbols-outlined">mail</span><strong>Sent </strong></button>
+            <button class="tablinks active" onclick="openTab(event, 'Send')"><strong>Send <span class="material-symbols-outlined">send</span></strong></button>
+        </div>
+        
+        <!-- Inbox Messages -->
+        <div id="inbox" class="tabcontent">
+            <h2>Inbox Messages</h2>
+            <ul>{% for message in r_messages %}
+                <li class="message">
+                    <strong>From: </strong>{{message[1]}}<br>
+                    <strong>Subject: </strong>{{message[3]}}<br>
+                    <strong>Message: </strong> {{message[4]}}<br>
+                    {{message[5]}}<br>
+                     <a href="#" class="reply">reply</a>
+                </li>
+                {% endfor %}
+                {% for message in r_messages_c %}
+                <li class="message">
+                    <strong>From: </strong>{{message[1]}}<br>
+                    <strong>Subject: </strong>{{message[3]}}<br>
+                    <strong>Message: </strong> {{message[4]}}<br>
+                    {{message[5]}}<br>
+                     <a href="#" class="reply">reply</a>
+                </li>
+                {% endfor %}
+            </ul>
+          
+        </div>
+        
+        <!-- Sent Messages -->
+        <div id="sent" class="tabcontent" >
+            <h2>Sent Messages</h2>
+            <ul>
+                {% for message in s_messages %}
+                <li class="message">
+                    <strong>To: </strong>{{message[2]}}<br>
+                    <strong>Subject: </strong>{{message[3]}}<br>
+                    <strong>Message: </strong> {{message[4]}}<br>
+                    <a href="#" class="reply">reply</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="Send"    class="tabcontent" style="display: block;">
+            <h1>Send Message</h1>
+            <form action="{{url_for('id_send_message',l_id=l_id)}}" method="post" class="message-form">
+                
+                <label for="name">Receiver Name:</label>
+                <select id="recipient-name" name="receiver-name" required>
+                    <option value=""  disabled selected>Select Recipient Name</option>
+                    <option value="Admin">Admin</option>
+                    <option value=""  disabled selected>Student list</option>
+                    {% for student in students %}
+                    <option value="{{student[2]}}">{{student[1]}} : {{student[2]}}</option>
+                    {% endfor %}
+                    
+                </select>
+                
+                <label for="subject">Subject:</label>
+                <input type="text" id="subject" name="subject" required>
+                
+                <label for="message">Body:</label>
+                <textarea id="message" name="body" required></textarea>
+                
+                <button type="submit" >Send   <span class="material-symbols-outlined">send</span></button>
+            </form>
+        </div>
+    </div>
+
+    <script> 
+    function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    // Deactivate all tab links
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    
+    // Show the selected tab content and set the tab link as active
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+    </script>
+</body>
+</html>

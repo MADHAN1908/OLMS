@@ -1,0 +1,229 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+   }
+   body{
+    background-color: white;
+   }
+header{
+    top: 0%;
+    width: 100%;
+    position: fixed;
+    background-color: #162838;
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content:space-between;
+   
+}
+header .material-symbols-outlined{
+    color: cyan;
+    display: none;
+}
+h2{
+    color: cyan;
+    margin-left: 20px;
+    margin-top: 5px;
+    /* justify-content:end; */
+}
+.person{
+    color: cyan;
+    font-size: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 40px;
+    /* justify-content:end; */
+}
+.dropdown{
+    position: relative;
+    display: inline;
+}
+.dropdown_menu{
+    display: none;
+    position: fixed;
+    right: 2rem;
+    top: 40px;
+    width: 200px;
+    z-index:10001;
+    border-style: ridge;
+    /* background-color: black; */
+    background-color:whitesmoke;
+    /* backdrop-filter: blur(15px); */
+    /* border-radius: 10px; */
+    overflow: hidden;
+}
+.hl{
+    border-top:2px ridge grey;
+}
+
+.dropdown_menu li{
+    padding: 0.2rem;
+    display: flex;
+    align-items: right;
+    justify-content: start;
+    border-style: ridge;
+  }
+  .dropdown_menu li a {
+    /* color: black; */
+    padding: 5px 10px;
+    text-decoration: none;
+    /* display: block; */
+    justify-content:start;
+    cursor: pointer;
+  }
+.dropdown_menu li a:hover {
+    color: red;
+}
+/* .dropdown:hover .dropdown_menu { */
+    /* display: block; */
+    /* justify-content: end; */
+    /* align-items:right; */
+/* } */
+.container{
+    display: flex;
+    position: fixed;
+    top: 40px;
+    height: 100%;
+    width: 200px;
+    z-index: 1;
+    background-color:whitesmoke;
+    overflow: hidden;
+    border-style: ridge ;
+    border-right-color: grey;
+}
+.container li{
+    padding: 0.2rem;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+.container li a{
+    display: flex;
+    position: relative;
+    padding: 10px  ;
+    width: 40vh;
+    text-decoration: none;
+    margin-left: 0rem;
+    gap: 1rem;
+    font-size: 18px;
+    align-items: center;
+    /* justify-content: center; */
+}
+img{
+    height:100px;
+    width: 100px;
+    border-radius: 50%;
+    margin-left: 40px;
+    margin-top: 20px;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+.img{
+    justify-content: center;
+}
+.material-symbols-outlined{
+    margin-left: 20px;
+}
+@media (max-width: 576px){
+    header .material-symbols-outlined{
+        display: block;
+        cursor: pointer;
+    }
+    h2{
+        font-size: small;
+        margin-left: 10px;
+    }
+    .container{
+        display: none;
+        
+    }
+    .pdf{
+        margin-left: 0px;
+        /* width: 100%; */
+
+    }
+    
+}
+.pdf{
+    /* display: none; */
+    top: 40px;
+    left: 200px;
+    padding-right: 20px;
+    width: 100%;
+}
+.subframe{
+    display: block;
+    position: fixed;
+    margin-right: 40px;
+    top: 40px;
+    left: 200px;
+    width: 90%;
+    height: 80%;
+    z-index: -1;
+}
+.btn{
+    margin-top: 40%;
+    margin-left: 70%;
+   
+}
+.openbtn{
+    border: 2px solid blue;
+    background-color: white;
+    color: blue;
+    padding: 14px 28px;
+    font-size: 16px;
+  cursor: pointer;
+}
+.openbtn:hover{
+    background-color: blue;
+    color: white;
+}
+.submit{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.submit, .re-answer{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    border: 2px solid green;
+    background-color: white;
+    color: green;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.submit:hover, .re-answer:hover{
+    background-color: green;
+    color: white;
+}
+
+
+.quiz{
+    display: none;
+    margin-left: 30%;
+    margin-top: 5%;
+    width: 600px;
+    gap: 5px;
+    border-style: solid;
+}
+.quiz p{
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 30px;
+}
+.quiz input[type=radio]{
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 20px;
+}
+.answer{
+    display: none;
+}
+.result {
+    margin-top: 10px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    display: none;
+  }

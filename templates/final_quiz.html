@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Course  DashBoard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/module_quiz.css') }}">
+</head>
+<body> 
+  <div class="block"> 
+    <form  action="{{ url_for('final_result',s_id=s_id,c_id=c_id,l_id=l_id) }}" id="final_result" method="post">
+    <div class="block-header" id="head">
+      
+      <h3> Final  Quiz </h3>
+      <div id="timer">Time Left: <span id="countdown"></span></div>
+
+      </div>
+      
+       <div id="quiz" class="quiz">
+        {% for question in questions %}
+        <div class="question">
+        <p>{{ question[2] }}</p>
+        <input type="radio"  name="{{question[1]}}" value="A">{{ question[3] }}<br>
+      <input type="radio"  name="{{question[1]}}" value="B">{{ question[4] }}<br>
+      <input type="radio"  name="{{question[1]}}" value="C">{{ question[5] }}<br>
+      <input type="radio"  name="{{question[1]}}" value="D">{{ question[6] }}<br>
+      <input type="hidden" name="ans" value="{{ question[7] }}"><br>
+       </div>{% endfor %}
+      </div>
+      <input type="hidden" name="score" id="score_input" value="0">
+      <input type="hidden" name="total" id="total_input" value="0">
+
+      <a  class="submit" onclick="showAnswer()">Submit</a>
+    </form>    
+    </div>
+    <script>
+
+         function showAnswer() {
+    var correctAnswers = document.querySelectorAll('input[name="ans"]');
+    var score=0;
+console.log("1")
+    for (var i = 0; i < correctAnswers.length; i++) {
+        var selectedAnswer = document.querySelector('input[name="' + (i+1) + '"]:checked').value;
+        console.log("2")
+        console.log(selectedAnswer)
+        var correctAnswer = correctAnswers[i].value;
+        console.log(correctAnswer)
+        if (selectedAnswer !== null && selectedAnswer === correctAnswer ) {
+            score = score + 1;
+            console.log("3")
+        } 
+      }
+      console.log("4")
+    var total = correctAnswers.length;
+    console.log("5")
+    console.log(score)
+    console.log(total)
+    document.getElementById('score_input').value = score;
+    document.getElementById('total_input').value = total;
+    document.getElementById('final_result').submit();
+}
+
+        
+         
+         
+         var timer = document.getElementById('countdown');
+    var timeLeft = 1200; 
+
+    function startTimer() {
+        var minutes, seconds;
+
+        var countdown = setInterval(function() {
+            minutes = Math.floor(timeLeft / 60);
+            seconds = timeLeft % 60;
+
+            timer.innerHTML = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                alert('Time is up!');
+                showAnswer();
+            }
+
+            timeLeft--;
+        }, 1000); // Update timer every second
+    }
+
+    startTimer(); 
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/course.css') }}" />
+</head>
+<body>
+    <div class="course_container">
+        <div class="head"><h3>Courses</h3></div>
+        <div class="content-block">
+            <div class="content">
+                <ul>
+                    {% for course in courses %}
+                    <li><a href="{{url_for('enroll',c_id=course[0],s_id=s_id,l_id=l_id)}}">
+                        <img src="data:image/jpeg;base64,{{ course[2] }}">
+                        <div class="hl"></div>
+                        <h4>{{ course[1] }}</h4>
+                    </a></li>
+                    {% endfor %}
+                   
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

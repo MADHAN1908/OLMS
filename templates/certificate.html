@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completion Certificate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .certificate {
+            border: 10px solid goldenrod; /* Green border */
+            background-color: whitesmoke;
+            padding: 30px;
+            max-width: 600px;
+            margin: 50px auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-image: url('file:\\C:\\Users\\Admin\\Documents\\Python_Project\\elms\\static\\images/cert3.jpg');
+              background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed; /* Optional */
+    background-color: transparent;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color:goldenrod;
+        }
+
+        .topic {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .name,.course {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* .footer {
+         /   display: grid;
+  grid-template-columns: auto auto auto auto;
+            display:flex;
+            height: 150px;
+            width: 100%;
+            flex-wrap: wrap;
+            flex-direction:row;
+            justify-content: space-between;
+            align-items: center;
+        } */
+
+/* 
+        .footer {
+            position:relative;
+            display: flex;
+            flex-direction: row;
+           width: 100%;
+          height: 200px;
+          padding: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px; Added margin to separate footer from content
+        }
+
+        .footer-item {
+            text-align: center;
+            width: 30%; Adjust width as needed
+             Added border for better visibility
+            padding-top: 10px; Added padding for spacing
+        } */
+
+        th{
+            text-align: center;
+        }
+        table h3 {
+            font-size: 18px;
+            width: 100%;
+            text-align: center;
+            /* max-width: 50%; */
+            /* border-top: 2px solid #4caf50; */
+            margin-top: 10px;
+            color: #555;
+        }
+
+        table p {
+            font-size: 16px;
+            text-align: center;
+            margin: 5px 0;
+        }
+        .hl {
+            border-top: 2px solid navy;
+            margin: 10px auto;
+            width: 50%;
+        }
+
+       
+        img{
+            float:left;
+        }
+    </style>
+</head>
+<body >
+    <div class="certificate" >
+        <div class="title">StudySync</div>
+        <div class="topic">Certificate of Completion</div>
+        <img src="file:\\\C:\\Users\\Admin\\Documents\\Python_Project\\elms\\static\\images\goldbadge.png" height="150" width="100">
+        <div class="content">This Certificate is awarded to</div>
+        <div class="name">{{s_name}}</div>
+        <div class="content">for successfully clearing the assessment on</div>
+        <div class="course">{{c_name}}</div>
+        <table>
+            <tr>
+            <td width="200px"><p>{{dt}}</p></td>
+            <td width="200px"><p>StudySync Learning</p></td>
+            <td width="200px"><p>SS-24{{ass_id}}</p></td>    
+            </tr>
+            <tr>
+                <td><div class="hl"></div></td>
+                <td><div class="hl"></div></td>
+                <td><div class="hl"></div></td>
+            </tr>
+            <tr>
+                <td><h3>Issued Date</h3></td>
+                <td><h3>Issued By</h3></td>
+                <td><h3>Certificate No.</h3></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

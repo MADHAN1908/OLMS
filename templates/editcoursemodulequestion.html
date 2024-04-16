@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Courses Module</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/addcoursemodule.css') }}">
+</head>
+<body>
+<div class="span1" id="">
+    <div class="row-fluid">
+       <!-- block -->
+       <div id="editquestion" style="display: block;" class="block add" >
+              <div class="block-header">
+               <div id="" class="head">
+                <a href="{{url_for('coursemodulequestion',id=id,m_no=m_no,l_id=l_id)}}" onclick="hideeditquestion()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                 </div>
+               </div>
+           <div class="block-content">
+               <div class="span2">
+                <form class="form-horizontal" action="{{url_for('updatecoursemodulequestion',id=id,m_no=m_no,q_no=question[0],l_id=l_id)}}" method="post">
+                  <div class="control-group">
+                    <label class="control-label" for="inputPassword">Question</label>
+                    <div class="controls">
+                       <textarea name="question" id="ckeditor_full" rows="6" required>{{ question[1]}}</textarea>
+                     </div>
+                   </div>
+ 
+                   <div class="control-group">
+                     <label class="control-label" for="inputEmail"> <input name="answer" value="A" type="radio" {% if question[6] == "A" %}checked{% endif %}>A:</label>
+                     <div class="controls">			
+                       <input type="text" name="opt1" value="{{ question[2]}}" size="60">
+                      </div>
+                   </div>
+                   <div class="control-group">
+                       <label class="control-label" for="inputEmail"> <input name="answer" value="B" type="radio" {% if question[6] == "B" %}checked{% endif %}>B:</label>
+                       <div class="controls">			
+                           <input type="text" name="opt2" value="{{ question[3]}}" size="60">
+                        </div>
+                     </div>
+                     <div class="control-group">
+                       <label class="control-label" for="inputEmail"><input name="answer" value="C" type="radio" {% if question[6] == "C" %}checked{% endif %}>C:</label>
+                       <div class="controls">			
+                           <input type="text" name="opt3" value="{{ question[4]}}" size="60">
+                        </div>
+                     </div>
+                     <div class="control-group">
+                       <label class="control-label" for="inputEmail"> <input name="answer" value="D" type="radio" {% if question[6] == "D" %}checked{% endif %}>D:</label>
+                       <div class="controls">			
+                           <input type="text" name="opt4" value="{{ question[5]}}" size="60">
+                        </div>
+                     </div>
+                   <div class="control-group">
+                       <label class="control-label" for="inputPassword">Answer Description</label>
+                       <div class="controls">
+                          <textarea name="ans_description" id="ckeditor_full" rows="6" required>{{ question[7]}}</textarea>
+                        </div>
+                      </div>
+  
+                   <div class="control-group">
+                   <div class="controls">   
+                     <button name="save" type="submit" class="btn-edit"><i class="icon-save"></i> Update</button>
+                   </div>
+                   </div>	                     
+   </form>							
+               </div>
+           </div>
+       </div>
+       <!-- /block -->
+   </div>
+</div>
+</body>
+</html>

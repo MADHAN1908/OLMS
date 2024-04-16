@@ -1,0 +1,108 @@
+<!-- templates/teacher_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/instructor.css') }}">
+    <!-- You can add additional CSS files here -->
+</head>
+<body>
+<div class="span1" >
+    <div class="row-fluid">
+        
+        <div id="block_bg" class="block">
+            <div class="block-header">
+                <div class="head">Score Details</div>
+            </div>
+            <div class="block-content">
+                <div class="span2">
+
+                        <table cellpadding="0" cellspacing="5" border="5" class="table" id="table">
+                            <form action="{{url_for('course_completed',l_id=l_id)}}" method="get" id="selectcourse">
+                                <select id="course" name="course" onchange="submitForm()">
+                                    <option value="" disabled selected>Select Course</option>
+                                    <option value="0" {% if   c_id[0]== "0" %} selected {% endif %}> ALL </option>
+                                    {% for course in courses %}
+                                      <option value="{{ course[0] }}" {% if course[0] == c_id[0] %} selected {% endif %}>
+                                    {{ course[1] }}
+                            </option>
+                            {% endfor %}
+                                </select>
+                                </form>
+                            <input type="text" id="searchInput" placeholder="Search..." style="float: right;">     
+                            <thead>
+                            <tr>
+                                <th>Student Id</th>
+                                <th>Student Name</th>
+                                <th>Course</th>
+                                <th>Score</th>
+                                <th>Percentage</th>
+                                <th>Date</th>
+                                <th>Certificate</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% if scores %}
+                                {% for score in scores %}
+                                <tr>
+                                    <td >{{score[1]}}</td>
+                                    <td >{{score[3]}}</td>
+                                    <td >{{score[4]}}</td>
+                                    <td>{{ score[5] }} out of {{score[6]}} </td>
+                                    <td>{{ score[7] }}%</td>
+                                    <td>{{ score[8] }}</td>
+                                    <td width="50"><a data-toggle="modal" href="{{url_for('capture_image',ass_id=score[0],c_name=score[4],s_name=score[3],dt=score[8])}}" class="btn btn-success"><span class="material-symbols-outlined">download</span></a></td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <tr><td colspan="5"><center>No Records.</center></td></tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- You can add additional JavaScript files here -->
+<script>
+    function submitForm() {
+            document.getElementById('selectcourse').submit();
+        }
+    const searchInput = document.getElementById('searchInput');
+        const dataTable = document.getElementById('table');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const rows = dataTable.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let cell of cells) {
+                    if (cell.textContent.toLowerCase().includes(searchTerm)) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }); 
+</script>
+</body>
+</html>

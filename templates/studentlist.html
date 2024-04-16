@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/adminuser.css') }}">
+</head>
+<body>
+    <div class="span1" id="">
+        <div class="row-fluid">
+           <!-- block -->
+           <div  id="block_bg" class="block">
+               <div class="block-header">
+                   <div class="head">Student List</div>
+               </div>
+               <div class="block-content">
+                   <div class="span2" id="studentTableDiv">
+                    <form action="{{url_for('course_student',l_id=l_id)}}" method="get" id="selectcourse">
+                        <select id="course" name="course" onchange="submitForm()">
+                            <option value="" disabled selected>Select Course</option>
+                            <option value="0" {% if   c_id[0]== "0" %} selected {% endif %}> ALL Students</option>
+                            {% for course in courses %}
+                              <option value="{{ course[0] }}" {% if course[0] == c_id[0] %} selected {% endif %}>
+                            {{ course[1] }}
+                    </option>
+                    {% endfor %}
+                        </select>
+                        </form>
+                    <form action="{{url_for('deletestudents',l_id=l_id)}}" method="post">
+                        <table cellpadding="0" cellspacing="0" border="5" class="table" id="table">
+                        <a href="#deleteConfirmation" onclick="showDeleteConfirmation()" id="delete"  class="btn-danger" name=""><span class="material-symbols-outlined">delete</span></a>
+                        
+                        <input type="text" id="searchInput" placeholder="Search..." style="float: right;">
+                        <div id="deleteConfirmation" class="modal">
+                            <div class="modal-header">
+                                <a href="#" onclick="hideDeleteConfirmation()" class="close" ><span class="material-symbols-outlined">close</span></a>
+                                <h3 >Delete Students?</h3>
+                                </div>
+                            <div class="modal-body">
+                                <p>Are you sure you want to delete the Student?</p>
+                                </div>
+                                <div class="modal-footer">
+                                <a href="#" class="btn-danger" onclick="hideDeleteConfirmation()"><span class="material-symbols-outlined">cancel</span> Cancel</a>
+                                <button class="btn-edit" onclick="deleteUser()"><span class="material-symbols-outlined">task_alt</span> Yes</button>
+                            </div>
+                        </div>
+                        <thead>
+                            <tr>
+                                        <th></th>
+                                        <th>Photo</th>
+                                        <th>Student ID</th>
+                                        <th>Name</th>
+                                        <th>Mail ID</th>
+                                        
+                            </tr>
+                            </thead>
+                            <tbody>
+                        {% for student in students %}
+                            <tr>
+                            <td width="30">
+                            <input id="optionsCheckbox" class="uniform_on" name="selector" type="checkbox" value="{{ student[0] }}">
+                            </td>
+                            <td width="40"><img class="img-circle" src="/static/images/NO-IMAGE-AVAILABLE.jpg" height="50" width="50"></td>
+                            <td>{{ student[0] }}</td> 
+                            <td>{{ student[1] }}</td> 
+                        
+                            <td width="100">{{ student[2] }}</td> 
+                            </tr>   
+                        {% endfor %}
+                            </tbody>
+                        </table>
+                        </form>
+                      
+                   </div>
+               </div>
+           </div>
+           <!-- /block -->
+       </div>
+
+
+   </div>
+   <script>
+
+function submitForm() {
+            document.getElementById('selectcourse').submit();
+        }
+
+    function showDeleteConfirmation() {
+      document.getElementById('deleteConfirmation').style.display = 'block';
+  }
+  
+  function hideDeleteConfirmation() {
+      document.getElementById('deleteConfirmation').style.display = 'none';
+  }
+  
+  function deleteUser() {
+      // Your logic to delete the user goes here
+      // After deletion, you can close the dialog box or perform any other action
+      console.log('User deleted!');
+      hideDeleteConfirmation();
+  }
+  const searchInput = document.getElementById('searchInput');
+        const dataTable = document.getElementById('table');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const rows = dataTable.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip the header row
+                const row = rows[i];
+                const cells = row.getElementsByTagName('td');
+                let found = false;
+
+                for (let cell of cells) {
+                    if (cell.textContent.toLowerCase().includes(searchTerm)) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+   </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Overview</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+   body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+.block {
+    border: 1px solid #ccc;
+    width: 84%;
+    position: relative;
+    background: white;
+    margin: 0.2em 0em;
+    border-top: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 6, 0.75);
+}
+.block-header{
+    box-shadow: 2px 2px 5px rgba(0, 0, 6, 0.75);
+    border-radius: 0px;
+    min-height: 40px;
+    padding-top: 5px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #fafafa;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+    margin-bottom: 0px;
+    text-align: center;
+    vertical-align: top;
+    overflow: visible;
+}
+.block-content{
+    margin: 1em;
+    min-height: 0.25em;
+    height: auto;
+    position: relative;
+    transition: height .35s ease;
+}
+.material-symbols-outlined{
+    vertical-align: bottom;
+    font-size: 20px;
+}
+.btn-cancel {
+    width: 70px;
+    margin-bottom: 10px;
+    color: black;
+    background-color: whitesmoke;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid;
+    /* border-bottom-color: #b3b3b3; */
+    border-radius: 4px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+}
+.btn-cancel:hover{
+    background-color:#999;
+}
+.course{
+    text-align: center;
+}
+.hl{
+    border-top:2px ridge grey;
+}
+a{
+    /* display:block; */
+    margin-top: 5px;
+    text-decoration: none;
+}
+.status{
+    float: right;
+    margin-right: 100px;
+}
+.quiz_link{
+    margin-bottom: 50px;
+}
+</style>
+</head>
+<body>
+    <div class="block">
+       <div class="block-header"><h1>Course Info</h1></div>
+       <div class="block-content">
+        <a href="{{ url_for('enroll',s_id=s_id,c_id=course[0],l_id=l_id)}}" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+        <div class="course"><h2>{{ course[1] }}</h2></div>
+        <div><p>{{ course[2] }}</p></div>
+        <div class="hl"></div>
+        <div>
+            <h4>Modules</h4>
+            {% for module in modules %}
+          
+          {% if module[2] == "Completed" %}
+          <a href="{{ url_for('module_status',s_id=s_id,c_id=course[0],m_no=module[0],l_id=l_id)}}" target="_blank" class="module" id="module1">Module - {{module[0]}}  :  {{module[1]}}</a>
+          <a class="status" style="color: green;">Completed  <span class="material-symbols-outlined">task_alt</span></a>
+          {% elif module[2] =="In Progress" %}
+          <a href="{{ url_for('module_status',s_id=s_id,c_id=course[0],m_no=module[0],l_id=l_id)}}" target="_blank" class="module" id="module1">Module - {{module[0]}}  :  {{module[1]}}</a>
+          <a class="status" style="color: red;">In Progress <span class="material-symbols-outlined">hourglass_top</span></a>
+          {% elif module[0] == f_module %}
+          <a href="{{ url_for('module_status',s_id=s_id,c_id=course[0],m_no=module[0],l_id=l_id)}}" target="_blank" class="module" id="module1">Module - {{module[0]}}  :  {{module[1]}}</a>
+          <a class="status" style="color: blue;">Start <span class="material-symbols-outlined">play_circle</span></a>
+          {% else %}
+          <a href="{{ url_for('module_status',s_id=s_id,c_id=course[0],m_no=module[0],l_id=l_id)}}" class="module" id="module1">Module - {{module[0]}}  :  {{module[1]}}</a>
+          <a class="status" style="color: blue;">Start <span class="material-symbols-outlined">play_circle</span></a>
+          {% endif %}
+          <br><br>
+          {% endfor %}
+         
+        </div>
+        <div class="hl"></div>
+        <div class="quiz_link">
+            <h4> Final Quiz </h4>
+            <a href="{{ url_for('final_quiz',s_id=s_id,c_id=course[0],l_id=l_id)}}"target="_parent" class="final_quiz"> Final Assessment</a>
+            {% if c_course %}
+            <a href="#" class="final_quiz"> Final Assessment</a>
+            <a class="status" style="color: green;">Completed  <span class="material-symbols-outlined">task_alt</span></a>
+            {% elif last_module and last_module[2] == "Completed" %}
+            <a href="{{ url_for('final_quiz',s_id=s_id,c_id=course[0],l_id=l_id)}}" target="_blank"  class="final_quiz"> Final Assessment</a>
+            <a class="status" style="color: blue;">Start <span class="material-symbols-outlined">play_circle</span></a>
+            {% else %}
+            <a href="#" class="final_quiz"> Final Assessment</a>
+            {% endif %}
+        </div>
+       </div>
+    </div>
+</body>
+</html>

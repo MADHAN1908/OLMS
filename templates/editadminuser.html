@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Users</title>
+   
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/adminuser.css') }}">
+</head>
+<body>
+    <div class="span1" >
+        <div class="block edit" id="edit_user" style="display: block;">
+            <div class="block-header">
+                <div class="head">Edit User</div>
+            </div>
+            <div class="block-content">
+                <div class="span2">
+                  <a href="{{url_for('adminusers',l_id=l_id)}}" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                  <form action ="{{url_for('updateadminuser',l_id=l_id)}}" method="post">
+                    <div class="control-group">
+                      <label class="control-label">User ID :</label>
+                      <div class="controls">
+                      <input type="text" class="" name="id" value="{{ user[0] }}" placeholder="Full Name" readonly>
+                      </div>
+                  </div>
+                    
+                    <div class="control-group">
+                      <label class="control-label">Full Name :</label>
+                      <div class="controls">
+                      <input type="text" class="" name="name" value="{{ user[1] }}" placeholder="Full Name" required>
+                      </div>
+                  </div>
+                          
+                  <div class="control-group">
+                    <label class="control-label">User Name :</label>
+                    <div class="controls">
+                    <input type="text" class="" name="user_name" value="{{ user[2] }}" placeholder="User Name" required>
+                    </div>
+                </div>
+  
+  
+                <div class="control-group">
+                  <label class="control-label">Access Level :</label>
+                  <div class="controls">
+                    <select  name="access_level" >
+                      <option value="0" {% if user[3] == "0" %} selected {% endif %} >Level 0</option>
+                      <option value="1" {% if user[3] == "1" %} selected {% endif %}>Level 1</option>
+                      <option value="2" {% if user[3] == "2" %} selected {% endif %}>Level 2</option>
+                      <option value="3" {% if user[3] == "3" %} selected {% endif %}>Level 3</option>
+                    </select> 
+                  </div>
+                </div>     
+                  
+                <div class="control-group">
+                  <div class="controls">
+                      <button name="Update" class="btn-edit"><span class="material-symbols-outlined">upgrade</span>Update</button>
+  
+                    </div>
+                  </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Course  DashBoard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/module_quiz.css') }}">
+</head>
+<body> 
+  <div class="block"> 
+    <div class="block-header">
+      <h3> Module Quiz </h3>
+      </div>
+      <a href="{{ url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no)}}" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+      <div id="quiz" class="quiz">
+        {% for question in questions %}
+        <div class="question">
+        <p>{{ question[3] }}</p>
+        <input type="radio"  name="{{question[2]}}" value="A">{{ question[4] }}<br>
+      <input type="radio"  name="{{question[2]}}" value="B">{{ question[5] }}<br>
+      <input type="radio"  name="{{question[2]}}" value="C">{{ question[6] }}<br>
+      <input type="radio"  name="{{question[2]}}" value="D">{{ question[7] }}<br>
+      <input type="hidden" name="ans" value="{{ question[8] }}"><br>
+       </div>
+       <div class="result"></div>
+       <div class="answer">
+        <h4> Answer : {{ question[9] }}</h4>
+       </div>{% endfor %}
+        </div> 
+        <a  class="submit" onclick="showAnswer()">Submit</a>
+        <a  class="re-answer"  onclick="hideAnswer()">Re-Answer</a><a class="score"></a>
+        <a href="{{ url_for('update_module_status', s_id=s_id , c_id=c_id , m_no=m_no )}}" class="next">Next</a>
+      </div>
+    <script>
+         function showAnswer() {
+    var answers = document.querySelectorAll('.answer');
+    var results = document.querySelectorAll('.result');
+    var correctAnswers = document.querySelectorAll('input[type="hidden"]');
+    var reAnswerBtn = document.querySelector('.re-answer');
+    var submit = document.querySelector('.submit');
+    var score=0;
+
+    for (var i = 0; i < answers.length; i++) {
+        var selectedAnswer = document.querySelector('input[name="' + (i + 1) + '"]:checked').value;
+        var correctAnswer = correctAnswers[i].value;
+
+        results[i].style.display = 'block';
+
+        if (selectedAnswer === correctAnswer) {
+            results[i].style.backgroundColor = 'green';
+            results[i].textContent = 'Correct Answer!';
+            score = score + 1;
+        } else {
+            results[i].style.backgroundColor = 'red';
+            results[i].textContent = 'Wrong Answer!';
+        }
+
+        answers[i].style.display = 'block';
+    }
+    document.querySelector('.score').innerHTML="Obtained Score is "+score+" out of "+answers.length;
+    var percentage = (score/answers.length)*100;
+    if (percentage >= 80){
+      document.querySelector('.next').style.display="inline-block";
+    }           
+    reAnswerBtn.style.display = 'inline-block';
+    submit.style.display = 'none';
+}
+        
+         function hideAnswer(){
+            var answer = document.querySelectorAll(".answer");
+            var re_answer = document.querySelector(".re-answer");
+            var results = document.querySelectorAll('.result');
+            var radioButtons = document.querySelectorAll('input[type="radio"]:checked')
+            for (var i = 0; i < answer.length; i++) {
+               answer[i].style.display = "none";
+               results[i].style.display = 'none';
+               radioButtons[i].checked=false;
+             }
+              re_answer.style.display = "none";
+              document.querySelector('.submit').style.display="inline-block";
+         }
+         
+        //  function toggleContainer(){
+        //     var container = document.querySelector(".container");
+        //     if (container.style.display === "none") {
+        //       container.style.display = "block";
+        //     //    Change icon to indicate closing
+        //      // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-up"></i>'; // Font Awesome icon for close state
+        //     } else {
+        //      container.style.display = "none";
+        //    // Change icon to indicate opening
+        //       // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-down"></i>'; // Font Awesome icon for open state
+        //     } 
+        //  }
+        //  function togglemenu(){
+        //     var menu = document.querySelector(".dropdown_menu");
+        //     if (menu.style.display === "none") {
+        //       menu.style.display = "block";
+        //     //    Change icon to indicate closing
+        //      // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-up"></i>'; // Font Awesome icon for close state
+        //     } else {
+        //      menu.style.display = "none";
+        //    // Change icon to indicate opening
+        //       // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-down"></i>'; // Font Awesome icon for open state
+        //     } 
+        //  }
+         
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

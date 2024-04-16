@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.profile-container {
+    max-width: 1050px;
+    margin: 0 0 0 0;
+    padding: 20px;
+    border-style: ridge;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-name {
+    margin-top: 10px;
+    font-size: 24px;
+}
+
+.profile-email {
+    color: #666;
+}
+
+.profile-details h2 {
+    margin-top: 20px;
+    font-size: 20px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.profile-details p {
+    margin-top: 10px;
+    line-height: 1.6;
+}
+ ul{
+    list-style: none;
+}
+ li{
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;
+    height: 150px;
+    width: 110px;
+    justify-content: space-around;
+    border-style: ridge;
+   
+}
+ li a{
+    position: relative;
+    
+    text-decoration: none;
+}
+ li a img{
+    height: 100px;
+    width: 100px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.hl{
+    border-top:2px ridge grey;
+}
+  h4{
+    /* margin-top: 0%;
+    margin-left: 5px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-around; */
+    margin: 0;
+    flex-grow: 1; /* Allow the text to grow vertically */
+    display: flex;
+    text-align: center;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+}

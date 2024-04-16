@@ -1,0 +1,108 @@
+<!-- templates/teacher_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/instructor.css') }}">
+    <!-- You can add additional CSS files here -->
+</head>
+<body>
+<div class="span1" >
+    <div class="row-fluid">
+        <!-- <div class="block edit" id="edit_instructor">
+            <div class="block-header">
+                <div class="head">Edit Instructor</div>
+            </div> -->
+            <!-- <div class="block-content collapse in">
+                <div class="span12">
+                    <form method="post">
+                        <div class="control-group">
+                            <label>Course :</label>
+                            <div class="controls">
+                                <select name="department" class="form-control" required>
+                                    <option></option>
+                                    <option value="">NULL</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="control-group">
+                            <div class="controls">
+                                <input class="form-control" name="firstname" type="text" placeholder="Firstname" required>
+                            </div>
+                        </div>
+    
+                        <div class="control-group">
+                            <div class="controls">
+                                <input class="form-control" name="lastname" type="text" placeholder="Lastname" required>
+                            </div>
+                        </div>
+    
+                        <div class="control-group">
+                            <div class="controls">
+                                <button name="save" class="btn-edit"><span class="material-symbols-outlined">upgrade</span> Update</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> -->
+        <!-- </div> -->
+        <div id="block_bg" class="block">
+            <div class="block-header">
+                <div class="head">Instructor List</div>
+            </div>
+            <div class="block-content">
+                <div class="span2">
+                    
+
+                        <table cellpadding="0" cellspacing="5" border="5" class="table" id="example">
+                              <thead>
+                            <tr>
+                                <!-- <th></th> -->
+                                <th>Photo</th>
+                                <th>Username</th>
+                                <th>Email ID</th>
+                                <th>Access</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for instructor in instructors %}
+                                <tr>
+                                    <!-- <td width="30">
+                                        <input id="optionsCheckbox" class="uniform_on" name="selector[]"
+                                               type="checkbox" value="{{ instructor[0] }}">
+                                    </td> -->
+                                    <td width="40"><img class="img-circle" src="/static/images/NO-IMAGE-AVAILABLE.jpg" height="50" width="50"></td>
+                                    <td>{{ instructor[1] }}</td>
+                                    <td>{{ instructor[2] }}</td>
+                                    <!-- <td width="50"><a data-toggle="modal" href="#edit_instructor" class="btn btn-success"><span class="material-symbols-outlined">edit</span></a></td> -->
+                                    {% if instructor[4] != 'Activated' %}
+                                        <td width="120"><a href="{{ url_for('activate',id=instructor[0],l_id=l_id) }}" class="btn btn-danger"><span class="material-symbols-outlined">cancel</span> Deactivate</a></td>
+                                    {% else %}
+                                        <td width="120"><a href="{{ url_for('deactivate',id=instructor[0],l_id=l_id) }}" class="btn btn-success"><span class="material-symbols-outlined">task_alt</span> Activated</a></td>
+                                    {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                
+                            </tbody>
+                        </table>
+                        </form>
+                </div>
+            </div>
+        </div>
+        <!-- /block -->
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<!-- You can add additional JavaScript files here -->
+<script>
+    
+</script>
+</body>
+</html>

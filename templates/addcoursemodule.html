@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Courses Module</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/addcoursemodule.css') }}">
+</head>
+<body>
+
+
+
+    <div class="span1" id="content" >
+        <div class="row-fluid">
+        <a href="#addcoursemodule"  onclick="openaddcoursemodule()" class="btn-edit" id="btn-add"><span class="material-symbols-outlined">add_circle</span> Add Course Modules</a>      
+        <div class="block add" id="addcoursemodule">
+            <div class="block-header">
+                <div class="head">Add Course Module</div>
+            </div>
+            <div class="block-content">
+                <div class="span2">
+                    <a href="#btn-add" onclick="hideaddcoursemodule()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                <form method="post">
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Course ID</label>
+                          <div class="controls">
+                            <input class="input focused" name="firstname" id="focusedInput" type="text" placeholder = "Course ID" required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Module Number :</label>
+                          <div class="controls">
+                            <input class="input focused" name="lastname" id="focusedInput" type="text" placeholder = "Module Number" required>
+                          </div>
+                        </div>
+                    
+                            <div class="control-group">
+                                <label class="control-label" for="inputPassword">Module Title :</label>
+                          <div class="controls">
+                            <input class="input focused" name="username" id="focusedInput" type="text" placeholder = "Module Title" required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">File :</label>
+                          <div class="controls">
+                            <input class="input focused" name="password" id="focusedInput" type="file"  required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="controls">
+                                <button name="save" class="btn-edit"><span class="material-symbols-outlined">add_circle</span>Add</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="block add" id="editcoursemodule">
+            <div class="block-header">
+                <div class="head">Edit Course Module</div>
+            </div>
+            <div class="block-content">
+                <div class="span2">
+                    <a href="#btn-add" onclick="hideeditcoursemodule()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                <form method="post">
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Course ID</label>
+                          <div class="controls">
+                            <input class="input focused" name="firstname" id="focusedInput" type="text" placeholder = "Course ID" required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Module Number :</label>
+                          <div class="controls">
+                            <input class="input focused" name="lastname" id="focusedInput" type="text" placeholder = "Module Number" required>
+                          </div>
+                        </div>
+                    
+                            <div class="control-group">
+                                <label class="control-label" for="inputPassword">Module Title :</label>
+                          <div class="controls">
+                            <input class="input focused" name="username" id="focusedInput" type="text" placeholder = "Module Title" required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">File :</label>
+                          <div class="controls">
+                            <input class="input focused" name="password" id="focusedInput" type="file"  required>
+                          </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <div class="controls">
+                                <button name="save" class="btn-edit">Update</button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- block -->
+           <div id="add-module" class="block">
+               <div class="block-header">
+                   <div class="head">Course Modules List</div>
+               </div>
+               <div class="form-group">
+                <label for="course">Select Course:</label>
+                <select id="course" name="course">
+                    <option value="course1">Course 1</option>
+                    <option value="course2">Course 2</option>
+                    <option value="course3">Course 3</option>
+                </select>
+            </div> 
+               <div class="block-content">
+                   <div class="span2">
+                       <form action="" method="post">
+                         <table cellpadding="0" cellspacing="0" border="5" class="table" id="example">
+                       <a href="#deleteConfirmation" id="delete" onclick="showDeleteConfirmation()" class="btn-danger" name=""><span class="material-symbols-outlined">delete</span></a>
+                       <div id="deleteConfirmation" class="modal">
+                        <div class="modal-header">
+                            <button type="button" onclick="hideDeleteConfirmation()" class="close" >x</button>
+                            <h3 >Delete Modules?</h3>
+                            </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete the Modules?</p>
+                            </div>
+                            <div class="modal-footer">
+                            <button class="btn-danger" onclick="hideDeleteConfirmation()"><span class="material-symbols-outlined">cancel</span> Cancel</button>
+                            <button class="btn-edit" onclick="deleteUser()"><span class="material-symbols-outlined">task_alt</span> Yes</button>
+                        </div>
+                    </div>
+                           <thead>
+                             <tr>
+                                   <th></th>
+                                   <th>Course ID</th>
+                                   <th>Module Number</th>
+                                   <th>Module Title</th>
+                                   <th>Questions</th>
+                                   <th></th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                               
+                           
+                               <tr>
+                                       <td width="30">
+                                       <input id="optionsCheckbox" class="uniform_on" name="selector[]" type="checkbox" value="">
+                                       </td>
+                                       <td>001</td>
+                                       <td>1</td>
+                                       <td>unit-1</td>
+                                       <td width="100"><a href="#questionlist" onclick="showquestions()" class="btn-successs">Questions</a></td>
+                                   
+                                       <td width="30"><a href="#editcoursemodule" onclick="showeditcoursemodule()" class="btn-successs"><span class="material-symbols-outlined">edit</span></a></td>
+                           </tr>
+                           </tbody>
+                       </table>
+                       </form>
+                   </div>
+               </div>
+           </div>
+           <!-- /block -->
+           <div  class="block" id="questionlist">
+            <div class="block-header">
+                <div class="head">Module Questions List</div>
+            </div>
+            
+            <div class="block-content">
+                <div class="span2">
+                    <a href="#add-module" onclick="hidequestions()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                    <form action="" method="post">
+                      <table cellpadding="0" cellspacing="0" border="5" class="table" id="example">
+                    <a href="#deleteConfirmation" id="delete" onclick="showDeleteConfirmation()" class="btn-danger" name=""><span class="material-symbols-outlined">delete</span></a>
+                    <a href="#addquestion"  onclick="showaddquestion()" class="btn-edit" id=""><span class="material-symbols-outlined">add_circle</span> Add Question</a>
+                    <div id="deleteConfirmation" class="modal">
+                     <div class="modal-header">
+                         <button type="button" onclick="hideDeleteConfirmation()" class="close" >x</button>
+                         <h3 >Delete questions?</h3>
+                         </div>
+                     <div class="modal-body">
+                         <p>Are you sure you want to delete the questions?</p>
+                         </div>
+                         <div class="modal-footer">
+                         <button class="btn-danger" onclick="hideDeleteConfirmation()"><span class="material-symbols-outlined">cancel</span> Cancel</button>
+                         <button class="btn-edit" onclick="deleteUser()"><span class="material-symbols-outlined">task_alt</span> Yes</button>
+                     </div>
+                 </div>
+                        <thead>
+                          <tr>
+                                <th></th>
+                                <th>Question Number</th>
+                                <th>Question Text</th>
+                                <th>Answer</th>
+                                <th></th>
+                           </tr>
+                        </thead>
+                        <tbody>                          
+                            <tr>
+                                    <td width="30">
+                                    <input id="optionsCheckbox" class="uniform_on" name="selector[]" type="checkbox" value="">
+                                    </td>
+                                    <td>1</td>
+                                    <td>nvhvnbvgcghcjcxjxfhdydfh</td>
+                                    <td>B</td>
+                                    <td width="30"><a href="#editquestion" onclick="showeditquestion()" class="btn-successs"><span class="material-symbols-outlined">edit</span></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /block -->
+       </div>
+
+
+   </div>
+   <div class="span1" id="">
+    <div class="row-fluid">
+       <!-- block -->
+       <div id="addquestion" class="block add" >
+              <div class="block-header">
+               <div id="" class="head">
+                <a href="#questionlist" onclick="hideaddquestion()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                 </div>
+               </div>
+           <div class="block-content">
+               <div class="span2">
+                <form class="form-horizontal" method="post">
+                   <div class="control-group">
+                     <label class="control-label" for="inputPassword">Question</label>
+                     <div class="controls">
+                        <textarea name="question" id="ckeditor_full" rows="6" required></textarea>
+                      </div>
+                    </div>
+  
+                    <div class="control-group">
+                      <label class="control-label" for="inputEmail"> <input name="answer" value="A" type="radio">A:</label>
+                      <div class="controls">			
+                        <input type="text" name="ans1" size="60">
+                       </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"> <input name="answer" value="B" type="radio">B:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans2" size="60">
+                         </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputEmail"><input name="answer" value="C" type="radio">C:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans3" size="60">
+                         </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputEmail"> <input name="answer" value="D" type="radio">D:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans4" size="60">
+                         </div>
+                      </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Answer Description</label>
+                        <div class="controls">
+                           <textarea name="question" id="ckeditor_full" rows="6" required></textarea>
+                         </div>
+                       </div>
+   
+                    <div class="control-group">
+                    <div class="controls">   
+                      <button name="save" type="submit" class="btn-edit"><i class="icon-save"></i> Save</button>
+                    </div>
+                    </div>	                   
+   </form>							
+               </div>
+           </div>
+       </div>
+       <!-- /block -->
+   </div>
+</div>
+<div class="span1" id="">
+    <div class="row-fluid">
+       <!-- block -->
+       <div id="editquestion" class="block add" >
+              <div class="block-header">
+               <div id="" class="head">
+                <a href="#questionlist" onclick="hideeditquestion()" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+                 </div>
+               </div>
+           <div class="block-content">
+               <div class="span2">
+                <form class="form-horizontal" method="post">
+                   <div class="control-group">
+                     <label class="control-label" for="inputPassword">Question</label>
+                     <div class="controls">
+                        <textarea name="question" id="ckeditor_full" rows="6" required></textarea>
+                      </div>
+                    </div>
+  
+                    <div class="control-group">
+                      <label class="control-label" for="inputEmail"> <input name="answer" value="A" type="radio">A:</label>
+                      <div class="controls">			
+                        <input type="text" name="ans1" size="60">
+                       </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail"> <input name="answer" value="B" type="radio">B:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans2" size="60">
+                         </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputEmail"><input name="answer" value="C" type="radio">C:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans3" size="60">
+                         </div>
+                      </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputEmail"> <input name="answer" value="D" type="radio">D:</label>
+                        <div class="controls">			
+                            <input type="text" name="ans4" size="60">
+                         </div>
+                      </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Answer Description</label>
+                        <div class="controls">
+                           <textarea name="question" id="ckeditor_full" rows="6" required></textarea>
+                         </div>
+                       </div>
+   
+                    <div class="control-group">
+                    <div class="controls">   
+                      <button name="save" type="submit" class="btn-edit"><i class="icon-save"></i> Update</button>
+                    </div>
+                    </div>	                   
+   </form>							
+               </div>
+           </div>
+       </div>
+       <!-- /block -->
+   </div>
+</div>
+   <script>
+        function openaddcoursemodule(){
+            document.getElementById("addcoursemodule").style.display='block';
+            document.getElementById("btn-add").style.display='none';
+            
+         }
+         function hideaddcoursemodule(){
+            document.getElementById("addcoursemodule").style.display='none';
+            document.getElementById("btn-add").style.display='block';
+            
+         }
+         function showeditcoursemodule(){
+            document.getElementById("editcoursemodule").style.display='block';
+         }
+         function hideeditcoursemodule(){
+            document.getElementById("editcoursemodule").style.display='none';
+         }  
+         function showquestions(){
+            document.getElementById("questionlist").style.display='block';
+         }
+         function hidequestions(){
+            document.getElementById("questionlist").style.display='none';
+         }
+         function showaddquestion(){
+            document.getElementById("addquestion").style.display='block';
+         }
+         function hideaddquestion(){
+            document.getElementById("addquestion").style.display='none';
+         } 
+         function showeditquestion(){
+            document.getElementById("editquestion").style.display='block';
+         }
+         function hideeditquestion(){
+            document.getElementById("editquestion").style.display='none';
+         }  
+        function showDeleteConfirmation() {
+            document.getElementById('deleteConfirmation').style.display = 'block';
+         }
+  
+        function hideDeleteConfirmation() {
+           document.getElementById('deleteConfirmation').style.display = 'none';
+         }
+  
+        function deleteUser() {
+            // Your logic to delete the user goes here
+            // After deletion, you can close the dialog box or perform any other action
+            console.log('User deleted!');
+            hideDeleteConfirmation();
+        }
+   </script>
+</body>
+</html>

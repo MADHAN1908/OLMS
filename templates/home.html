@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home.css') }}" />
+</head>
+<body>    
+    <header id="myHeader">
+        <div class="nav">
+        <h2 class="olms">StudySync</h2>
+        <ul class="links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="dropdown">
+        <button  class="login">Login</button>
+        <div class="dropdown-content">
+            <li><a href="/studentlogin">User</a></li>
+            <li><a href="/adminlogin">Admin</a></li>
+          </div>
+        </div>
+        <span class="icons" ><ion-icon name="menu"></ion-icon></span>
+        </div>
+        <div class="dropdown_menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#about">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="/student">User Login</a></li>
+            <li><a href="/admin">Admin Login</a></li>
+        </div>
+    
+    </header>
+
+    <div id="home" class="home" style=" background-image: url('/static/images/signin.jpg');background-repeat: no-repeat; background-size:cover; background-position: center;">
+    <h1> WELCOME TO  StudySync LEARNING</h1>
+    <p>Embrace the digital dawn, where every click opens the door to boundless knowledge.</p>
+    </div>
+        <div id="about" class="about">
+        <h1> ABOUT</h1>
+        <p>Welcome to our StudySync learning platform! We’re passionate about education and committed to providing high-quality learning experiences for students, professionals, and lifelong learners. Here’s what you need to know about us:</p>
+        <p>Course Creation:<br> LMS allows educators to create and organize courses with various multimedia content, such as videos, presentations, and documents.
+            
+            <br> User Management:<br> Administrators can manage user accounts, enrollments, and permissions within the system.
+            
+            <br>Content Management:<br> LMS provides tools for uploading, organizing, and delivering educational content, including lectures, assignments, quizzes, and assessments.
+            
+            <br> Communication Tools:<br> Platforms offer communication features like discussion forums, messaging, and announcements to facilitate interaction between instructors and students.
+            
+            <br>Progress Tracking: <br>LMS enables tracking of student progress, performance, and engagement through analytics and reporting tools.
+            
+            <br> Assessment and Grading:<br> Educators can create quizzes, assignments, and exams, and LMS automates grading and provides feedback to students.</p>
+    </div>
+    <section id="contact" class="contact">
+      <div class="container">
+          <h2>Contact Us</h2>
+          <div class="contact-wrapper">
+            <div class="contact-container">
+              <div class="contact-form">
+                  <h3>Send us a message</h3>
+                  <form action="user_message" method="post">
+                      <div class="form-group">
+                       <input type="text" name="name" placeholder="Registed Name" required>
+                      </div>
+                      <div class="form-group">
+                          <input type="email" name="email" placeholder="Registered Email" required>
+                         </div>
+                         <div class="form-group">
+                         <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                         </div>
+                         <div class="form-group" style="color:white;" >{{confirm}}</div>
+                         <button type="submit"><b>Send Message</b></button>
+                  </form>
+              </div>
+              </div>
+              <div class="contact-info">
+                  <h3>Contact Information</h3>
+                  <p><i class="fa-solid fa-phone"></i>+91 9876543210</p>
+                  <p><i class="fa-solid fa-envelope"></i>studysync@gmail.com</p>
+                  <p><i class="fa-solid fa-location-dot"></i>thiruvalluvar street. dubai kuruku santhu, dubai main road, dubai</p>
+              </div>
+          </div>
+      </div>
+  </section>
+    <script>
+        const icon = document.querySelector('.icons')
+        const dropdown_menu = document.querySelector('.dropdown_menu')
+        icon.onclick = function () {
+            dropdown_menu.classList.toggle('open')
+            const isOpen =dropdown_menu.classList.contains('open')
+
+        }
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/studentlogin.css') }}" />
+</head>
+<body style=" background-image: url('/static/images/signin.jpg');">
+    <div class="wrapper">
+        <a href="/" ><span class="icon-close"><ion-icon name="close-outline"></ion-icon></span></a>
+        <div class="form-login">
+            <h1>Login</h1>
+            <form action="/studentdashboard" method="post">
+            <div class="input-box">
+                <span class="icons"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+            <div class="forgot">
+                <label><input type="checkbox">Remember me </label>
+                <a href="">Forgot Password</a>
+            </div>
+            <div>
+                {% if success %}
+                       <p id="alert" class="success">{{success}}</p>
+                {% endif %}       
+            </div>
+            <div>
+                {% if error %}
+                       <p id="alert" class="error">{{error}}</p>
+                {% endif %}       
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+            <div class="register">
+                <p>Don't have a account?<a href="#" class="register-link">Register</a></p>
+            </div>
+            </form>
+        </div>
+        <div class="form-register">
+            <div class="tab">
+                <button class="tablinks form-active" onclick="openTab(event, 'student')"><strong>Student  </strong></button>
+                <button class="tablinks" onclick="openTab(event, 'instructor')"><strong>Instructor </strong></button>
+            </div>
+            <form id="student" class="tabcontent" action="/studentregister" method="post">
+                <h1> Student    Registration</h1>
+            <div class="input-box">
+                <span class="icons"><ion-icon name="person"></ion-icon></span>
+                <input type="text" id="name" name="name" required>
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <span class="icons"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" id="email" name="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" id="password" name="password"  required>
+                <label>Password</label>
+            </div>
+            <div class="input-box">
+                <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" id="confirmpassword" onkeyup="check_password()" required>
+                <label>Confirm Password</label>
+            </div>
+            <div><p id="match" class="match"></p></div>
+            <!-- <div><p class="error"></p></div> -->
+            <!-- <div class="forgot">
+                <label><input type="checkbox">I agree to the terms & conditions </label>
+            </div> -->
+            <div>
+                {% if success %}
+                       <p id="alert" class="success">{{success}}</p>
+                {% endif %}       
+            </div>
+            <div>
+                {% if error %}
+                       <p id="alert" class="error">{{error}}</p>
+                {% endif %}       
+            </div>
+            <button type="submit" class="register-btn">Register</button>
+            <div class="register">
+                <p>Already have a account?<a href="#" class="login-link">Login</a></p>
+            </div>
+            </form>
+
+            <form id="instructor" class="tabcontent" action="/instructor_register" method="post" style="display: none;">
+                <h1>Instructor Registration</h1>
+                <div class="input-box">
+                    <span class="icons"><ion-icon name="person"></ion-icon></span>
+                    <input type="text" id="i_name" name="name" required>
+                    <label>Username</label>
+                </div>
+                <div class="input-box">
+                    <span class="icons"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" id="i_email" name="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" id="i_password" name="password"  required>
+                    <label>Password</label>
+                </div>
+                <div class="input-box">
+                    <span class="icons"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" id="i_confirmpassword" onkeyup="i_check_password()" required>
+                    <label>Confirm Password</label>
+                </div>
+                <div><p id="i_match" class="match"></p></div>
+                <!-- <div><p class="error"></p></div> -->
+                <!-- <div class="forgot">
+                    <label><input type="checkbox">I agree to the terms & conditions </label>
+                </div> -->
+                <div>
+                    {% if success %}
+                           <p id="alert" class="success">{{success}}</p>
+                    {% endif %}       
+                </div>
+                <div>
+                    {% if error %}
+                           <p id="alert" class="error">{{error}}</p>
+                    {% endif %}       
+                </div>
+                <button type="submit" class="register-btn">Register</button>
+                <div class="register">
+                    <p>Already have a account?<a href="#" class="login-link">Login</a></p>
+                </div>
+                </form>
+        </div>
+    </div>
+    
+    <script>
+        const wrapper =document.querySelector('.wrapper');
+        const loginlink =document.querySelectorAll('.login-link');
+        const registerlink =document.querySelector('.register-link');
+      
+        registerlink.addEventListener('click',()=> {wrapper.classList.add('active');});
+        loginlink[0].addEventListener('click',()=> {wrapper.classList.remove('active');});
+        loginlink[1].addEventListener('click',()=> {wrapper.classList.remove('active');});
+
+        function check_password() {
+            var password = document.getElementById("password").value;
+            var confirmpassword = document.getElementById("confirmpassword").value;
+
+            if (password != confirmpassword) {
+                document.getElementById("match").innerHTML = "Password do not match!";
+                document.getElementById("match").style.color='red';
+            } else {
+                document.getElementById("match").innerHTML = "Password Matched";
+                document.getElementById("match").style.color='green';
+            }
+        }
+        function i_check_password() {
+            var password = document.getElementById("i_password").value;
+            var confirmpassword = document.getElementById("i_confirmpassword").value;
+
+            if (password != confirmpassword) {
+                document.getElementById("i_match").innerHTML = "Password do not match!";
+                document.getElementById("i_match").style.color='red';
+            } else {
+                document.getElementById("i_match").innerHTML = "Password Matched";
+                document.getElementById("i_match").style.color='green';
+            }
+        }
+        function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // Hide all tab content
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    
+    // Deactivate all tab links
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" form-active", "");
+    }
+    
+    // Show the selected tab content and set the tab link as active
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " form-active";
+}
+
+        setTimeout(function() {
+            var elements = document.querySelectorAll('.success, .error');
+            elements.forEach(function(element) {
+                element.style.display = 'none';
+            });
+        }, 5000);
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
