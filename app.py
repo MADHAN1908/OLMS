@@ -573,13 +573,13 @@ def  id_message():
     
     cur.execute('SELECT * FROM message WHERE sender_email = %s',(i_id[2],))
     s_messages=cur.fetchall()
-    cur.execute('SELECT * FROM message WHERE receiver_email = %s', (i_id[2],))
-    r_messages=cur.fetchall()
-    # cur.execute('SELECT m.*, c.course_name FROM message m LEFT JOIN course c ON m.receiver_email = c.course_id where NOT receiver_email = %s or receiver_email IN (select email_id from student)', (admin,))
-    # r_messages_c=cur.fetchall()
-    cur.execute('SELECT m.*, c.course_name FROM message m  JOIN course c ON m.receiver_email = c.course_id ')
-    r_messages_c=cur.fetchall()
-    return render_template('id_messages.html',s_messages=s_messages,r_messages=r_messages,r_messages_c=r_messages_c,students=students,l_id=l_id)
+    cur.execute('''
+    SELECT m.*, c.course_name FROM message m
+    LEFT JOIN course c ON m.receiver_email = c.course_id
+    WHERE m.receiver_email = %s or m.receiver_email = c.course_id''', (i_id[2],))
+    r_messages = cur.fetchall()
+
+    return render_template('id_messages.html',s_messages=s_messages,r_messages=r_messages,students=students,l_id=l_id)
 
 @app.route('/id_send_message',methods=["POST"])
 def  id_send_message():
