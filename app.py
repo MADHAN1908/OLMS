@@ -13,9 +13,9 @@ app=Flask(__name__)
 
 app.secret_key = os.urandom(24)
 app.config['UPLOAD_FOLDER'] = 'static/UPLOAD_FOLDER/'
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_HOST'] = 'edusync.mysql.database.azure.com'
+app.config['MYSQL_USER'] = 'welcome'
+app.config['MYSQL_PASSWORD'] = 'azureuser@12345'
 app.config['MYSQL_DB'] = 'olms'
 
 mysql = MySQL(app)
