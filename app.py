@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
-import sqlite3
+from db import *
 app=Flask(__name__)
 
 DATABASE = 'StudySync.db'  
@@ -70,6 +70,8 @@ def cmc():
 
 @app.route('/')
 def home():
+    create_table()
+    add_module_count_trigger()
     confirm=request.args.get('confirm')
     return render_template('home.html',confirm=confirm)
 @app.route('/user_message' ,methods=['POST'])
