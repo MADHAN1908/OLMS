@@ -1,4 +1,4 @@
 Flask==2.0.2
 Flask-MySQLdb==0.2.0
 matplotlib
-sqlite3
+sqlite==3.5.1
