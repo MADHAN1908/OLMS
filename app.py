@@ -1,15 +1,15 @@
-from flask import Flask,g,render_template,send_file,request, redirect, url_for,session
+from flask import Flask,render_template,send_file,request, redirect, url_for,session,g
 import subprocess
 import base64,os
 from io import BytesIO
 from datetime import datetime, timedelta
 import matplotlib
-matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import sqlite3
-app=Flask(__name__)
 
-DATABASE = 'StudySync.db'  
+app=Flask(__name__)
+matplotlib.use('agg')
+DATABASE = 'StudySync.db1'  
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -1450,5 +1450,6 @@ def  course_completed():
     courses=cur.fetchall()
     # cur.close()
     return render_template('ad_score_details.html',scores=scores,courses=courses,c_id=course_id,l_id=l_id)
+
 if __name__=="__main__":
     app.run (debug=True)    
