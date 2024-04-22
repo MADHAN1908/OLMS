@@ -1,15 +1,15 @@
-from flask import Flask,render_template,send_file,request, redirect, url_for,session,g
+from flask import Flask,g,render_template,send_file,request, redirect, url_for,session
 import subprocess
 import base64,os
 from io import BytesIO
 from datetime import datetime, timedelta
 import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 import sqlite3
-
 app=Flask(__name__)
-matplotlib.use('agg')
-DATABASE = 'StudySync.db1'  
+
+DATABASE = 'StudySync.db'  
 def get_db():
     db = getattr(g, '_database', None)
     if db is None:
@@ -326,8 +326,6 @@ def  courseinfo():
     s_id = request.args.get('s_id')
     db= get_db()
     cur = db.cursor()
-    
-    
     cur.execute('select course_id,course_name,course_description from course where course_id=?',(c_id,))
     course=cur.fetchone()
     cur.execute('''SELECT c.module_no, c.title, e.status FROM course_module c
@@ -363,13 +361,13 @@ def  module_status():
     cur.execute('select status from enroll_course where course_id= ? and student_id = ? and module_no = ?',(c_id,s_id,m_no))
     status=cur.fetchone()
     if status :
-        return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no))            
+        return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no,l_id=l_id))            
     else:    
         if m_no=="1" :
             status="In Progress"
             cur.execute('INSERT INTO enroll_course(student_id,course_id,module_no,status,enroll_date) values(?,?,?,?,?)',(s_id[0],c_id,m_no,status,date))
             db.commit()
-            return redirect(url_for('courseinfo',s_id=s_id,c_id=c_id))
+            return redirect(url_for('courseinfo',s_id=s_id,c_id=c_id,l_id=l_id))
         else:
             pre_m_no=str(int(m_no)-1)
             cur.execute('select status from enroll_course where course_id= ? and student_id = ? and module_no = ?',(c_id,s_id,pre_m_no))
@@ -378,13 +376,15 @@ def  module_status():
                 status="In Progress"
                 cur.execute('INSERT INTO enroll_course(student_id,course_id,module_no,status,enroll_date) values(?,?,?,?,?)',(s_id[0],c_id,m_no,status,date))
                 db.commit()
-                return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no))
+                return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no,l_id=l_id))
             else:
                 sub="courseinfo"
+
                 return render_template('studentdashboard.html',sub=sub,l_id=l_id,c_id=c_id,s_id=s_id)
             
 @app.route('/update_module_status')
 def  update_module_status():
+    l_id=request.args.get('l_id')
     c_id=request.args.get('c_id')
     s_id = request.args.get('s_id')
     m_no=request.args.get('m_no')
@@ -392,13 +392,13 @@ def  update_module_status():
     date=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     db= get_db()
     cur = db.cursor()
-    cur.execute('update enroll_course set status = ? and completed_date=? where course_id= ? and student_id = ? and module_no = ?',(m_status,date,c_id,s_id,m_no))
+    cur.execute('update enroll_course set status = ? , completed_date= ? where course_id= ? and student_id = ? and module_no = ?',(m_status,date,c_id,s_id,m_no))
     db.commit()
     next_m_no=str(int(m_no)+1)
     cur.execute('select status from enroll_course where course_id= ? and student_id = ? and module_no = ?',(c_id,s_id,next_m_no))
     status=cur.fetchone()
     if status:
-        return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=next_m_no))            
+        return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=next_m_no,l_id=l_id))            
     else:
         cur.execute('select * from course_module where course_id= ? and module_no = ?',(c_id,next_m_no))
         module=cur.fetchone()
@@ -406,12 +406,14 @@ def  update_module_status():
            status="In Progress"
            cur.execute('INSERT INTO enroll_course(student_id,course_id,module_no,status,enroll_date) values(?,?,?,?,?)',(s_id[0],c_id,next_m_no,status,date))
            db.commit()
-           return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=next_m_no))
+           return redirect(url_for('view_module',s_id=s_id,c_id=c_id,m_no=next_m_no,l_id=l_id))
         else:
-           return redirect(url_for('courseinfo',s_id=s_id,c_id=c_id))            
+           sub="courseinfo"
+           return render_template('studentdashboard.html',sub=sub,l_id=l_id,c_id=c_id,s_id=s_id)           
             
 @app.route('/view_module')
 def  view_module():
+    l_id=request.args.get('l_id')
     s_id=request.args.get('s_id')
     c_id=request.args.get('c_id')
     m_no=request.args.get('m_no')
@@ -422,9 +424,10 @@ def  view_module():
     # cur.close()
     file_path, file_name = pdf
     # pdf_path = os.path.join(file_path, file_name)
-    return render_template('module_view.html',pdf_path=file_path,s_id=s_id,c_id=c_id,m_no=m_no) 
+    return render_template('module_view.html',pdf_path=file_path,s_id=s_id,c_id=c_id,m_no=m_no,l_id=l_id) 
 @app.route('/module_quiz')
 def  module_quiz():
+    l_id=request.args.get('l_id')
     s_id=request.args.get('s_id')
     c_id=request.args.get('c_id')
     m_no=request.args.get('m_no')
@@ -433,7 +436,7 @@ def  module_quiz():
     cur.execute('select * from module_quiz where course_id=? and module_no =?',(c_id,m_no))
     questions=cur.fetchall()
     print(questions)
-    return render_template('module_quiz.html',s_id=s_id,c_id=c_id,m_no=m_no,questions=questions) 
+    return render_template('module_quiz.html',s_id=s_id,c_id=c_id,m_no=m_no,questions=questions,l_id=l_id) 
 
 @app.route('/final_quiz')
 def  final_quiz():
@@ -1450,6 +1453,5 @@ def  course_completed():
     courses=cur.fetchall()
     # cur.close()
     return render_template('ad_score_details.html',scores=scores,courses=courses,c_id=course_id,l_id=l_id)
-
 if __name__=="__main__":
     app.run (debug=True)    

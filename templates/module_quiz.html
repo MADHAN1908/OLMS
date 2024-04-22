@@ -13,7 +13,7 @@
     <div class="block-header">
       <h3> Module Quiz </h3>
       </div>
-      <a href="{{ url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no)}}" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
+      <a href="{{ url_for('view_module',s_id=s_id,c_id=c_id,m_no=m_no,l_id=l_id)}}" class="btn-cancel"><span class="material-symbols-outlined">arrow_back</span> Back</a>
       <div id="quiz" class="quiz">
         {% for question in questions %}
         <div class="question">
@@ -31,7 +31,7 @@
         </div> 
         <a  class="submit" onclick="showAnswer()">Submit</a>
         <a  class="re-answer"  onclick="hideAnswer()">Re-Answer</a><a class="score"></a>
-        <a href="{{ url_for('update_module_status', s_id=s_id , c_id=c_id , m_no=m_no )}}" class="next">Next</a>
+        <a href="{{ url_for('update_module_status', s_id=s_id , c_id=c_id , m_no=m_no,l_id=l_id )}}" class="next">Next</a>
       </div>
     <script>
          function showAnswer() {
@@ -81,32 +81,6 @@
               re_answer.style.display = "none";
               document.querySelector('.submit').style.display="inline-block";
          }
-         
-        //  function toggleContainer(){
-        //     var container = document.querySelector(".container");
-        //     if (container.style.display === "none") {
-        //       container.style.display = "block";
-        //     //    Change icon to indicate closing
-        //      // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-up"></i>'; // Font Awesome icon for close state
-        //     } else {
-        //      container.style.display = "none";
-        //    // Change icon to indicate opening
-        //       // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-down"></i>'; // Font Awesome icon for open state
-        //     } 
-        //  }
-        //  function togglemenu(){
-        //     var menu = document.querySelector(".dropdown_menu");
-        //     if (menu.style.display === "none") {
-        //       menu.style.display = "block";
-        //     //    Change icon to indicate closing
-        //      // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-up"></i>'; // Font Awesome icon for close state
-        //     } else {
-        //      menu.style.display = "none";
-        //    // Change icon to indicate opening
-        //       // document.querySelector(".toggle-button").innerHTML = '<i class="fas fa-chevron-down"></i>'; // Font Awesome icon for open state
-        //     } 
-        //  }
-         
     </script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
