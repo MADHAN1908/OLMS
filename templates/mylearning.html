@@ -14,11 +14,19 @@
                 <ul>
                     {% if courses %}
                     {% for course in courses %}
+                    {% if course[3]== "Activated" %}
                     <li><a href="{{url_for('enroll',c_id=course[0],s_id=s_id,l_id=l_id)}}">
                         <img src="data:image/jpeg;base64,{{ course[2] }}">
                         <div class="hl"></div>
                         <h4>{{ course[1] }}</h4>
                     </a></li>
+                    {% else %}
+                    <li><a href="#">
+                        <img src="data:image/jpeg;base64,{{ course[2] }}">
+                        <div class="hl"></div>
+                        <h4>{{ course[1] }}</h4>
+                    </a></li>
+                    {% endif %}
                     {% endfor %}
                     {% else %}
                     <center>No Course is Enrolled.</center>

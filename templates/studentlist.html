@@ -54,6 +54,7 @@
                                         <th>Student ID</th>
                                         <th>Name</th>
                                         <th>Mail ID</th>
+                                        <th>Registered DATE</th>
                                         
                             </tr>
                             </thead>
@@ -67,7 +68,8 @@
                             <td>{{ student[0] }}</td> 
                             <td>{{ student[1] }}</td> 
                         
-                            <td width="100">{{ student[2] }}</td> 
+                            <td width="100">{{ student[2] }}</td>
+                            <td >{{ student[3] }}</td> 
                             </tr>   
                         {% endfor %}
                             </tbody>

@@ -73,7 +73,7 @@
                          <div class="form-group">
                          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
                          </div>
-                         <div class="form-group" style="color:white;" >{{confirm}}</div>
+                         <div class="form-group" style="color:white;" >{% if confirm %}{{confirm}}{% endif %}</div>
                          <button type="submit"><b>Send Message</b></button>
                   </form>
               </div>

@@ -80,7 +80,8 @@
                                    <th>Course Title</th>
                                    <th>No of Modules</th>
                                    <th>Questions</th>
-                                   <th></th>
+                                   <th>Edit</th>
+                                   <th>Access</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -95,6 +96,12 @@
                                        <td>{{ course[2] }}</td>
                                        <td width="100"><a href="{{url_for('coursequestion',id=course[0],l_id=l_id)}}" onclick="showquestions()" class="btn-successs">Questions</a></td>
                                        <td width="30"><a href="{{url_for('editcourse',id=course[0],l_id=l_id)}}" onclick="showeditcourse()" class="btn-successs"><span class="material-symbols-outlined">edit</span></a></td>
+                                       {% if course[3] != 'Activated' %}
+                                        <td width="120"><a href="{{ url_for('activate_course',id=course[0],l_id=l_id) }}" class="btn btn-danger"><span class="material-symbols-outlined">cancel</span> Deactivate</a></td>
+                                       {% else %}
+                                        <td width="120"><a href="{{ url_for('deactivate_course',id=course[0],l_id=l_id) }}" class="btn-successs"><span class="material-symbols-outlined">task_alt</span> Activated</a></td>
+                                       {% endif %}
+                                    
                            </tr>
                            {% endfor %}
                            </tbody>

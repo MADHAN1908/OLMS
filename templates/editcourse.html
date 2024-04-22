@@ -26,12 +26,7 @@
                         <input type="text" class="" name="title" id="inputPassword" value="{{course[1]}}" placeholder="Course Title" required>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="inputPassword">Course Logo</label>
-                        <div class="controls">
-                        <input type="file" class="" name="file" id="inputPassword" required>
-                        </div>
-                    </div>
+                    
             
                     <div class="control-group">
                         <label class="control-label" for="inputPassword">Description</label>
@@ -45,9 +40,25 @@
                     <div class="control-group">
                     <div class="controls">
                     
-                    <button name="update" type="submit" class="btn-successs"> Update</button>
+                    <button name="update" type="submit" class="btn-successs"> Update Content</button>
                     </div>
                     </div>
+                    </form>
+                    <div class="hl"></div>
+                    <form class="form-horizontal" enctype="multipart/form-data" action="{{url_for('updatecourse_logo',id=course[0],l_id=l_id)}}" method="post">
+                        <div class="control-group"></div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputPassword">Course Logo</label>
+                        <div class="controls">
+                        <input type="file" class="" name="file" id="inputPassword" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                        
+                        <button name="update" type="submit" class="btn-successs"> Update Logo</button>
+                        </div>
+                        </div>
                     </form>
                 </div>
             </div>

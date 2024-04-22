@@ -41,12 +41,7 @@
                           </div>
                         </div>
                         
-                        <div class="control-group">
-                            <label class="control-label" for="inputPassword">File :</label>
-                          <div class="controls">
-                            <input class="input focused" name="file" id="focusedInput" type="file"  required>
-                          </div>
-                        </div>
+                        
                         <div class="control-group">
                         {% if message %}<p style="color: red;">{{message}}</p>{% endif %}
                         </div>
@@ -57,6 +52,23 @@
                             </div>
                         </div>
                     </form>
+                    <div class="hl"></div>
+                    <form action="{{url_for('updatecoursemodule_PDF',l_id=l_id,id=module[0],m_no=module[1])}}" method="post" enctype="multipart/form-data">
+                      <div class="control-group"></div>
+                      <div class="control-group">
+                      <label class="control-label" for="inputPassword">File :</label>
+                      <div class="controls">
+                       <input class="input focused" name="file" id="focusedInput" type="file"  required>
+                      </div>
+                    </div>
+                    <div class="control-group">
+                      <div class="controls">
+                          <button name="save" class="btn-edit">Update PDF</button>
+
+                      </div>
+                  </div>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
